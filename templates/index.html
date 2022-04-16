@@ -32,10 +32,33 @@
 	<h1>Hello Homepage</h1>
 	<br />
 	<form action="" method="post">
-		{{form.hidden_tag()}} {{form.name.label}} {{form.name()}} {{form.submit()}}
+		{{form.hidden_tag()}} {{form.name.label}} {{form.name()}}
+		<!-- Boolean Field -->
+		<br />
+		{{form.isAccept()}}{{form.isAccept.label}}
+		<!-- Radio Field -->
+		<br />
+		{{form.gender.label}} {{form.gender()}}
+		<!-- Select Field -->
+		<br />
+		{{form.skills.label}} {{form.skills()}}
+		<!-- Address Field -->
+		<br />
+		{{form.address.label}}
+		<br />
+		{{form.address()}}
+		<!-- Submit Button -->
+		<br />
+		{{form.submit()}}
 	</form>
 	<hr />
-	{% if name %} Your name is <strong> {{name}} </strong>
+	{% if session['name'] %} Your name is <strong> {{session['name']}} </strong>
+	<br />
+	Accept the terms and conditions? <strong> {{session['isAccept']}} </strong>
+	<br />
+	Your gender is <strong> {{session['gender']}} </strong> <br />
+	Your skill is <strong> {{session['skills']}} </strong> <br />
+	Your Address is <strong> {{session['address']}} </strong> <br />
 	{% else %} Data not Found {% endif %}
 </div>
 {% endblock %}

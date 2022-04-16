@@ -21,5 +21,7 @@
 </html> -->
 
 {% extends "layout.html" %} {% block content %}
-<h1>Hello About</h1>
-{% endblock %}
+<h1>Welcome to About</h1>
+{% for item in products %}
+<p>{{item}}</p>
+{% endfor %} {% endblock %}

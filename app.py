@@ -1,7 +1,8 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, BooleanField, RadioField, SelectField, TextAreaField
+from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
@@ -9,19 +10,32 @@ app.config['SECRET_KEY'] = 'mykey'
 
 
 class MyForm(FlaskForm):
-    name = StringField("Enter Your Name")
+    name = StringField("Enter Your Name", validators=[DataRequired()])
+    isAccept = BooleanField("Accept Terms and Conditions")
+    gender = RadioField("Select your gender", choices=[
+                        ('m', 'male'), ('f', 'female'), ('o', 'others')])
+    skills = SelectField("Your skills", choices=[
+                         ("English", "English"), ("Singing", "Singing"), ("Gaming", "Gaming")])
+    address = TextAreaField("Your Address")
     submit = SubmitField("Save")
 
 
 @app.route('/', methods=["GET", "POST"])
 def index():
     form = MyForm()
-    name = False
     if form.validate_on_submit():
-        name = form.name.data
+        session['name'] = form.name.data
+        session['isAccept'] = form.isAccept.data
+        session['gender'] = form.gender.data
+        session['skills'] = form.skills.data
+        session['address'] = form.address.data
+        # Clear Data
         form.name.data = ""
+        form.isAccept.data = ""
+        form.gender.data = ""
+        form.address.data = ""
     data = {"name": "Moopz-Dev", "age": 30, "job": "Programmer"}
-    return render_template("index.html", data=data, form=form, name=name)
+    return render_template("index.html", form=form, data=data)
 
 
 @app.route('/about')

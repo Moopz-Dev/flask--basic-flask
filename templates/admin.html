@@ -26,5 +26,23 @@
 </html> -->
 
 {% extends "layout.html" %} {% block content %}
-<h1>Hello Admin</h1>
+<div class="container">
+	<h2>Contact Admin</h2>
+	<form action="{{url_for('signupForm')}}" method="get">
+		<div class="form-group">
+			<label for="fname"> Contacter</label>
+			<input type="text" name="fname" class="form-control" />
+		</div>
+		<div class="form-group">
+			<label for="details"> Details</label>
+			<textarea
+				name="details"
+				class="form-control"
+				cols="30"
+				rows="10"
+			></textarea>
+		</div>
+		<input type="submit" value="send" class="btn btn-success" />
+	</form>
+</div>
 {% endblock %}

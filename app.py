@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -24,6 +24,13 @@ def admin():
 @app.route('/user/<name>/<age>')
 def user(name, age):
     return "<h1>Hello {}, Age: {} </h1>".format(name, age)
+
+
+@app.route('/sendData')
+def signupForm():
+    fname = request.args.get('fname')
+    details = request.args.get('details')
+    return render_template("thankyou.html", data={"fname": fname, "details": details})
 
 
 if __name__ == "__main__":

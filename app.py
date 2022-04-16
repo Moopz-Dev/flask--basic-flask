@@ -16,9 +16,8 @@ def about():
 
 @app.route('/admin')
 def admin():
-    myname = "Moopz-Dev"
-    myage = 30
-    return render_template("admin.html", myname=myname, myage=myage)
+    username = "Moopz"
+    return render_template("admin.html", username=username)
 
 
 @app.route('/user/<name>/<age>')

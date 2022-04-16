@@ -11,7 +11,8 @@ def index():
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    products = ["Attires", "Elctronics", "Toiletries"]
+    return render_template("about.html", products=products)
 
 
 @app.route('/admin')

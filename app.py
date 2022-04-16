@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    data = {"name": "Moopz-Dev", "age": 30, "job": "Programmer"}
+    return render_template("index.html", data=data)
 
 
 @app.route('/about')
@@ -15,7 +16,9 @@ def about():
 
 @app.route('/admin')
 def admin():
-    return render_template("admin.html")
+    myname = "Moopz-Dev"
+    myage = 30
+    return render_template("admin.html", myname=myname, myage=myage)
 
 
 @app.route('/user/<name>/<age>')

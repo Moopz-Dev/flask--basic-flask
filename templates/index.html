@@ -26,31 +26,20 @@
 		<h1>{{data.age}}</h1>
 	</body>
 </html> -->
-
-{% extends "layout.html" %} {% block content %}
+{% import "bootstrap/wtf.html" as wtf %} {% extends "layout.html" %} {% block
+title %} Welcome to Flask Website {% endblock %} {% block content %}
 <div class="container mt-2">
-	<h1>Hello Homepage</h1>
-	<br />
-	<form action="" method="post">
-		{{form.hidden_tag()}} {{form.name.label}} {{form.name()}}
-		<!-- Boolean Field -->
-		<br />
-		{{form.isAccept()}}{{form.isAccept.label}}
-		<!-- Radio Field -->
-		<br />
-		{{form.gender.label}} {{form.gender()}}
-		<!-- Select Field -->
-		<br />
-		{{form.skills.label}} {{form.skills()}}
-		<!-- Address Field -->
-		<br />
-		{{form.address.label}}
-		<br />
-		{{form.address()}}
-		<!-- Submit Button -->
-		<br />
-		{{form.submit()}}
-	</form>
+	{% for message in get_flashed_messages() %}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		{{message}}
+		<button
+			type="button"
+			class="btn-close"
+			data-bs-dismiss="alert"
+			aria-label="Close"
+		></button>
+	</div>
+	{% endfor %} {{ wtf.quick_form(form)}}
 	<hr />
 	{% if session['name'] %} Your name is <strong> {{session['name']}} </strong>
 	<br />
@@ -61,4 +50,10 @@
 	Your Address is <strong> {{session['address']}} </strong> <br />
 	{% else %} Data not Found {% endif %}
 </div>
+<script>
+	const btn = document.querySelector(".btn.btn-default");
+	btn.classList.remove("btn-default");
+	btn.classList.add("btn-success");
+	console.log(btn);
+</script>
 {% endblock %}

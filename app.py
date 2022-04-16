@@ -1,12 +1,27 @@
+
 from flask import Flask, render_template, request
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'mykey'
 
 
-@app.route('/')
+class MyForm(FlaskForm):
+    name = StringField("Enter Your Name")
+    submit = SubmitField("Save")
+
+
+@app.route('/', methods=["GET", "POST"])
 def index():
+    form = MyForm()
+    name = False
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ""
     data = {"name": "Moopz-Dev", "age": 30, "job": "Programmer"}
-    return render_template("index.html", data=data)
+    return render_template("index.html", data=data, form=form, name=name)
 
 
 @app.route('/about')

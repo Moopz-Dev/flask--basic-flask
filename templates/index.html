@@ -28,5 +28,14 @@
 </html> -->
 
 {% extends "layout.html" %} {% block content %}
-<h1>Hello Homepage</h1>
+<div class="container mt-2">
+	<h1>Hello Homepage</h1>
+	<br />
+	<form action="" method="post">
+		{{form.hidden_tag()}} {{form.name.label}} {{form.name()}} {{form.submit()}}
+	</form>
+	<hr />
+	{% if name %} Your name is <strong> {{name}} </strong>
+	{% else %} Data not Found {% endif %}
+</div>
 {% endblock %}
